@@ -1,7 +1,5 @@
 const COOL_LETTERS_TIMER = 150
 
-var wordOfTheDay = document.querySelector("#word-of-the-day")
-
 var diskSlider = document.querySelector("#diskSlider")
 var numDisks = document.querySelector("#numDisks")
 var minMoves = document.querySelector("#minMoves")
@@ -262,42 +260,3 @@ function coolLetters(el) {
         letter.style = `color: rgb(${r}, ${g}, ${b}); font-size: ${size}px;`
     }
 }
-
-// FETCH STUFF
-
-const URL = "https://api.jsonbin.io/b/5f4fdc154d8ce4111387550c"
-
-// JSON data from URL^
-// {
-//     "words": [
-//       "guacamole",
-//       "metastasize",
-//       "elfin",
-//       "brachiosaurus",
-//       "gripe",
-//       "doughnut"
-//     ]
-//   }
-
-// Very advanced method to fetch very significant word of the day!
-function getWord(url) {
-    fetch(url).then((response) => {
-        response.json().then((data) => {
-            let words = data.words
-            let i = Math.floor(Math.random() * words.length)
-            let word = words[i]
-
-            for (let index = 0; index < word.length; index++) {
-                let spanLetter = document.createElement("span")
-                spanLetter.innerHTML = word[index]
-                wordOfTheDay.appendChild(spanLetter)
-            }
-
-            setInterval(() => {
-                coolLetters(wordOfTheDay)
-            }, COOL_LETTERS_TIMER);
-        })
-    });
-}
-
-getWord(URL)
