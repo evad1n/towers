@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="modal.css">
+    <title>Towers of Hanoi</title>
+</head>
+
+<body>
+    <div id="help-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p>The objective of the game is to move all the disks over to Tower 3 (with your mouse).
+                However, you cannot place a larger disk onto a smaller disk.</p>
+          </div>
+    </div>
+
+    <div id="word-of-the-day-container">
+        <h2>Today's Word of the Day</h2>
+        <h1 id="word-of-the-day"></h1>
+    </div>
+    <div id="help">
+        <h2>?</h2>
+    </div>
+    <h1>Towers of Hanoi</h1>
+    <div class="slidecontainer">
+        <h3>Number of Disks: <span id="numDisks">3</span></h3>
+        <input type="range" min="1" max="10" value="3" class="slider" id="diskSlider">
+        <h3>This can be solved in <span id="minMoves"></span></h3>
+    </div>
+    <div class="play-area">
+        <div class="tower-area" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <div class="tower-stand"></div>
+            <div id="three" class="tower">
+
+            </div>
+        </div>
+
+        <div class="tower-area" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <div class="tower-stand"></div>
+            <div id="two" class="tower">
+
+            </div>
+        </div>
+
+        <div class="tower-area" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <div class="tower-stand"></div>
+            <div id="one" class="tower">
+
+            </div>
+        </div>
+
+        <h1 id="perfectWin">
+            <span>P</span>
+            <span>E</span>
+            <span>R</span>
+            <span>F</span>
+            <span>E</span>
+            <span>C</span>
+            <span>T</span>
+        </h1>
+        <h1 id="win">You did it!</h1>
+        <h1 id="solved">Done!</h1>
+    </div>
+
+    <h2 id="moveNumber">Move <span></span></h2>
+
+    <div class="controls">
+        <button id="solve" >Solve</button>
+        <button id="reset" >Reset</button>
+        <h3>Solve Speed</h3>
+        <input type="range" min="50" max="3000" value="1000" class="slider" id="solveSpeed">
+    </div>
+
+    <script src="script.js"></script>
+    <script src="modal.js"></script>
+</body>
+
+</html>

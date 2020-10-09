@@ -1,0 +1,104 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #d4c603;
+    text-align: center;
+}
+
+#word-of-the-day-container {
+    position: absolute;
+    float: left;
+}
+
+#diskSlider{
+    cursor: pointer;
+}
+
+.play-area{
+    background-color: rgb(206, 206, 206);
+    padding: 10px;
+    display: grid;
+    grid-template-columns: 33.3% 33.3% 33.3%;
+    grid-template-rows: 300px;
+    grid-template-areas:
+        "one two three";
+    transform: rotateZ(180deg);
+    border-radius: 10px;
+}
+
+.tower-area{
+    position: relative;
+}
+
+.tower{
+    margin: auto;
+    background-color: rgb(255, 178, 62);
+    width: 8px;
+    height: 100%;
+    border-radius: 0 0 5px 5px;
+}
+
+.tower-stand{
+    width: 85%;
+    height: 8px;
+    background-color: rgb(255, 178, 62);
+    border-radius: 5px;
+    margin: auto;
+}
+
+.disk{
+    height: 20px;
+    border-radius: 500px;
+    border: 2px solid black;
+    position: relative;
+}
+
+.topDisk {
+    cursor: pointer;
+}
+
+.topDisk:hover {
+    border: 2px solid white;
+}
+
+#moveNumber {
+    margin-bottom: 0;
+}
+
+button{
+    font-size: 1.5em;
+    margin-top: 10px;
+    width: 5em;
+    height: 2em;
+    border-radius: 500px;
+    border: 2px solid black;
+}
+
+button:hover:enabled{
+    cursor:pointer;
+    background-color: rgb(207, 207, 207);
+    border: 2px solid white;
+}
+
+#solve{
+    background-color: rgb(0, 255, 0);
+}
+
+#reset{
+    background-color: rgb(255, 0, 0);
+}
+
+#solveSpeed {
+    display: block;
+    margin: auto;
+    margin-top: 10px;
+}
+
+#perfectWin, #win, #solved{
+    display: none;
+    position: absolute;
+    width: 300px;
+    height: 8vh;
+    top: calc(50% - 4vh);
+    left: calc(50% - 150px);
+    transform: rotateZ(180deg)
+}  
