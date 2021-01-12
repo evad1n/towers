@@ -6,73 +6,73 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="modal.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
     <title>Towers of Hanoi</title>
 </head>
 
 <body>
-    <div id="help-modal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <p>The objective of the game is to move all the disks over to Tower 3 (with your mouse).
-                However, you cannot place a larger disk onto a smaller disk.</p>
-        </div>
-    </div>
-
-    <div id="help">
-        <h2>?</h2>
-    </div>
-    <h1>Towers of Hanoi</h1>
-    <div class="slidecontainer">
-        <h3>Number of Disks: <span id="numDisks">3</span></h3>
-        <input type="range" min="1" max="10" value="3" class="slider" id="diskSlider">
-        <h3>This can be solved in <span id="minMoves"></span></h3>
-    </div>
-    <div class="play-area">
-        <div class="tower-area" ondrop="drop(event)" ondragover="allowDrop(event)">
-            <div class="tower-stand"></div>
-            <div id="three" class="tower">
-
+    <div id="app">
+        <div id="help-modal" class="modal" v-if="helpModal" ref="helpModal">
+            <div class="modal-content">
+                <span class="close" @click="helpModal = false">&times;</span>
+                <p>The objective of the game is to move all the disks over to Tower 3 (with your mouse).
+                    However, you cannot place a larger disk onto a smaller disk.</p>
             </div>
         </div>
 
-        <div class="tower-area" ondrop="drop(event)" ondragover="allowDrop(event)">
-            <div class="tower-stand"></div>
-            <div id="two" class="tower">
+        <div id="help" @click="helpModal = !helpModal">
+            <h2>?</h2>
+        </div>
+        <h1 id="title">Towers of Hanoi</h1>
+        <div class="slidecontainer">
+            <h3>Number of Disks: {{ numDisks }}</h3>
+            <input type="range" v-model.number="numDisks" @input="reset()" min="1" :max="maxDisks" class="slider"
+                id="diskSlider">
+            <h3>This can be solved in {{minMoves}} (2<sup>{{numDisks}}</sup>-1) moves</h3>
+        </div>
+        <div class="play-area">
+            <div v-for="(tower, towerIdx) in towers" :key="towerIdx" class="tower-area" @drop="drop($event, towerIdx)"
+                @dragover="allowDrop">
+                <div id="i" class="tower">
+                    <div v-for="(disk, k) in tower" :key="disk" :id="'disk-' + disk" :data-number="disk" class="disk"
+                        :class="{topDisk: k == 0}" :style="disks[disk - 1]" :draggable="k == 0"
+                        @dragstart="dragStart($event, towerIdx, disk)">
+                    </div>
+                </div>
+                <div class="tower-stand"></div>
+            </div>
 
+
+            <div class="win" v-if="done">
+                <h1 v-if="doneSolving">Done!</h1>
+                <template v-else>
+                    <h1>You did it!</h1>
+                    <h1 v-if="perfect" ref="perfect">
+                        <span>P</span>
+                        <span>E</span>
+                        <span>R</span>
+                        <span>F</span>
+                        <span>E</span>
+                        <span>C</span>
+                        <span>T</span>
+                    </h1>
+                </template>
             </div>
         </div>
 
-        <div class="tower-area" ondrop="drop(event)" ondragover="allowDrop(event)">
-            <div class="tower-stand"></div>
-            <div id="one" class="tower">
+        <h2 id="move-number">Move {{ moveNumber }}</h2>
 
-            </div>
+        <div class="controls">
+            <button @click="beginSolve()" :disabled="solving">Solve</button>
+            <button @click="reset()">Reset</button>
+            <button @click="randomizeDiskColors()">Change Colors</button>
+            <h3>Solve Speed</h3>
+            <input id="solve-speed" type="range" v-model.number="solveSpeed" min="50" max="1200" class="slider">
+            <p>{{ movesPerSec }} moves/second</p>
         </div>
-
-        <h1 id="perfectWin">
-            <span>P</span>
-            <span>E</span>
-            <span>R</span>
-            <span>F</span>
-            <span>E</span>
-            <span>C</span>
-            <span>T</span>
-        </h1>
-        <h1 id="win">You did it!</h1>
-        <h1 id="solved">Done!</h1>
-    </div>
-
-    <h2 id="moveNumber">Move <span></span></h2>
-
-    <div class="controls">
-        <button id="solve">Solve</button>
-        <button id="reset">Reset</button>
-        <h3>Solve Speed</h3>
-        <input type="range" min="50" max="3000" value="1000" class="slider" id="solveSpeed">
     </div>
 
     <script src="script.js"></script>
-    <script src="modal.js"></script>
 </body>
 
 </html>

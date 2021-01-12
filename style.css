@@ -1,19 +1,46 @@
-body{
+body {
     font-family: Arial, Helvetica, sans-serif;
-    background-color: #d4c603;
+    background-color: #d6dac6;
     text-align: center;
 }
 
-#word-of-the-day-container {
-    position: absolute;
-    float: left;
+#title {
+    font-size: 2.4rem;
 }
 
-#diskSlider{
+input[type=range] {
+    -webkit-appearance: none;
     cursor: pointer;
+    height: 10px;
+    opacity: 1;
+    outline: none;
+    background: white;
+    transition: .2s;
+    border-radius: 3px;
 }
 
-.play-area{
+input[type=range]:hover {
+    background-color: rgb(105, 105, 105);
+
+    opacity: 0.5;
+}
+
+input[type=range]::-webkit-slider-thumb {
+    cursor: pointer;
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background: #4CAF50;
+    border-radius: 5px;
+}
+
+input[type=range]:active,
+input[type=range]::-webkit-slider-thumb:active {
+    cursor: grabbing;
+}
+
+.play-area {
     background-color: rgb(206, 206, 206);
     padding: 10px;
     display: grid;
@@ -21,23 +48,22 @@ body{
     grid-template-rows: 300px;
     grid-template-areas:
         "one two three";
-    transform: rotateZ(180deg);
     border-radius: 10px;
+    border: 2px solid black;
 }
 
-.tower-area{
-    position: relative;
-}
-
-.tower{
+.tower {
     margin: auto;
     background-color: rgb(255, 178, 62);
     width: 8px;
     height: 100%;
-    border-radius: 0 0 5px 5px;
+    border-radius: 5px 5px 0 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
 }
 
-.tower-stand{
+.tower-stand {
     width: 85%;
     height: 8px;
     background-color: rgb(255, 178, 62);
@@ -45,7 +71,7 @@ body{
     margin: auto;
 }
 
-.disk{
+.disk {
     height: 20px;
     border-radius: 500px;
     border: 2px solid black;
@@ -60,45 +86,41 @@ body{
     border: 2px solid white;
 }
 
-#moveNumber {
-    margin-bottom: 0;
+#move-number {
+    margin: 10px 0 0 0;
 }
 
-button{
+button {
+    outline: none;
     font-size: 1.5em;
     margin-top: 10px;
-    width: 5em;
+    min-width: 5em;
     height: 2em;
     border-radius: 500px;
     border: 2px solid black;
+    transition: .2s;
+    opacity: 0.7;
 }
 
-button:hover:enabled{
-    cursor:pointer;
-    background-color: rgb(207, 207, 207);
+button:hover:enabled {
+    cursor: pointer;
     border: 2px solid white;
+    background-color: rgb(207, 207, 207);
+    opacity: 1s;
 }
 
-#solve{
+#solve {
     background-color: rgb(0, 255, 0);
 }
 
-#reset{
+#reset {
     background-color: rgb(255, 0, 0);
 }
 
-#solveSpeed {
-    display: block;
-    margin: auto;
-    margin-top: 10px;
-}
-
-#perfectWin, #win, #solved{
-    display: none;
+.win {
     position: absolute;
     width: 300px;
     height: 8vh;
     top: calc(50% - 4vh);
     left: calc(50% - 150px);
-    transform: rotateZ(180deg)
-}  
+}
